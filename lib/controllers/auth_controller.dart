@@ -1,12 +1,9 @@
-import 'dart:io';
+import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:path/path.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:my_shop/controllers/home_controller.dart';
 import 'package:my_shop/model/user_model.dart';
 import 'package:my_shop/screens/admin_page.dart';
@@ -41,7 +38,7 @@ class AuthController extends GetxController {
   late CollectionReference collectionReference4;
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   RxList<Users> users = RxList<Users>([]);
-  late Widget route;
+  var route;
   @override
   void onReady() {
     _user.bindStream(auth.userChanges());
@@ -72,13 +69,26 @@ class AuthController extends GetxController {
       .map((query) => query.docs.map((item) => Users.fromMap(item)).toList());
 
   String? get user_ch => _user.value!.email;
-  _initialScreen(User? user) {
+  _initialScreen(User? user) async {
     if (user == null) {
       route = LoginView();
     } else {
-      users.bindStream(getAllUser());
-      route = HomePage();
+      final userDoc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
+      if (userDoc.exists) {
+        final userType = userDoc['type'];
+        if (userType == 'admin') {
+          route = Managment();
+        } else {
+          route = HomePage();
+        }
+      } else {
+        route = LoginView();
+      }
     }
+    update();
   }
 
   late String uid;
@@ -189,6 +199,7 @@ class AuthController extends GetxController {
             onPressed: () async {
               MainController controller = Get.find();
               controller.carts.value.clear();
+              log("user logout: ${auth.currentUser!.email!}");
               await auth
                   .signOut()
                   .then((value) => Get.offAll(() => LoginView()));
@@ -254,24 +265,45 @@ class AuthController extends GetxController {
             .limit(1) // Limit to one document for efficiency
             .get();
         if (userDoc.docs.isNotEmpty) {
-          Get.back();
-          email.clear();
-          password.clear();
-          users.bindStream(getAllUser());
-          Get.offAll(() => HomePage());
-        } else {
-          final adminDoc = await FirebaseFirestore.instance
-              .collection('admin')
-              .where('email', isEqualTo: email.text)
-              .limit(1) // Limit to one document for efficiency
-              .get();
-          if (adminDoc.docs.isNotEmpty) {
+          String userType = userDoc.docs.first['type'];
+
+          // Navigate based on user type
+          if (userType == "admin") {
             Get.back();
             email.clear();
             password.clear();
+            users.bindStream(getAllUser());
+            log("user login init: ${auth.currentUser!.email!}");
             Get.offAll(() => Managment());
+          } else {
+            Get.back();
+            email.clear();
+            password.clear();
+            users.bindStream(getAllUser());
+            log("user login init: ${auth.currentUser!.email!}");
+            Get.offAll(() => HomeScreen());
           }
+          // Get.back();
+          // email.clear();
+          // password.clear();
+          // users.bindStream(getAllUser());
+          // log("user login init: ${auth.currentUser!.email!}");
+          // Get.offAll(() => HomePage());
         }
+        // else {
+        //   final adminDoc = await FirebaseFirestore.instance
+        //       .collection('admin')
+        //       .where('email', isEqualTo: email.text)
+        //       .limit(1) // Limit to one document for efficiency
+        //       .get();
+        //   if (adminDoc.docs.isNotEmpty) {
+        //     Get.back();
+        //     email.clear();
+        //     password.clear();
+        //     log("user login init: ${auth.currentUser!.email!}");
+        //     Get.offAll(() => Managment());
+        //   }
+        // }
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {
           Get.back();
@@ -282,59 +314,6 @@ class AuthController extends GetxController {
           showbar("About Login", "Login message", e.toString(), false);
         }
       }
-    }
-  }
-
-  void addProduct() async {
-    final isValid = formKey.currentState!.validate();
-    if (!isValid) {
-      update();
-      return;
-    } else {
-      try {
-        showdilog();
-        await FirebaseFirestore.instance.collection('product').doc().set({
-          "price": int.parse(price.text),
-          "name": product_name.text,
-          "color": color.text, // Assuming default color as red
-          "company": company.text,
-          "description": description.text,
-          "image": await uploadImage(await pickImage()),
-          "number": int.parse(number.text),
-          "section": section.text,
-          "type": type.text
-        });
-        Get.back();
-        Get.back();
-        showbar("Product Added", "Product Added", "Product Added ", true);
-      } catch (e) {
-        Get.back();
-        showbar("Error", "Error", e.toString(), false);
-      }
-    }
-  }
-
-  Future<String> uploadImage(File? imageFile) async {
-    try {
-      String fileName = basename(imageFile!.path);
-      Reference firebaseStorageRef =
-          FirebaseStorage.instance.ref().child('product_images/$fileName');
-      UploadTask uploadTask = firebaseStorageRef.putFile(imageFile);
-      TaskSnapshot taskSnapshot = await uploadTask;
-      String downloadUrl = await taskSnapshot.ref.getDownloadURL();
-      return downloadUrl;
-    } catch (e) {
-      throw Exception("Error uploading image: $e");
-    }
-  }
-
-  Future<File?> pickImage() async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    if (image != null) {
-      return File(image.path);
-    } else {
-      return null;
     }
   }
 }

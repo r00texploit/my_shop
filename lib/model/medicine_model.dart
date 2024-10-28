@@ -8,6 +8,7 @@ class Medicine {
   String? description;
   bool? isFavorited;
   String? image;
+  String? company;
   int? price;
   int? number;
   String? color;
@@ -16,6 +17,7 @@ class Medicine {
       {this.id,
       required this.type,
       required this.section,
+      required this.company,
       required this.price,
       required this.color,
       required this.image,
@@ -31,6 +33,7 @@ class Medicine {
     name = data["name"];
     image = data["image"];
     color = data["color"];
+    company = data["company"];
     number = data["number"];
     section = data["section"];
     description = data["description"];
@@ -47,6 +50,7 @@ class Medicine {
     image = data["image"];
     color = data["color"];
     number = data["number"];
+    company = data["company"];
     section = data["section"];
     description = data["description"];
     isFavorited = data["is_favorited"];

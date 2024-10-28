@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_shop/controllers/auth_controller.dart';
@@ -13,13 +12,25 @@ class Managment extends StatefulWidget {
 }
 
 class _ManagmentState extends State<Managment> {
-  AuthController auth = Get.find();
+  var auth = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     final data = MediaQuery.of(context);
     final width = data.size.width;
     final height = data.size.height;
     return Scaffold(
+      appBar: AppBar(
+          backgroundColor: Colors.indigo,
+          title: const Text('Admin Screen'),
+          centerTitle: true,
+          actions: [
+            IconButton(
+                icon: Icon(Icons.logout),
+                onPressed: () {
+                  var auth = Get.put(AuthController());
+                  auth.signOut();
+                })
+          ]),
       body: Container(
         alignment: Alignment.center,
         margin: EdgeInsets.only(

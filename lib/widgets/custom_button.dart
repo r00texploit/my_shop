@@ -17,13 +17,13 @@ class CustomTextButton extends StatelessWidget {
     final height = data.size.height;
     return TextButton(
       style: ButtonStyle(
-          padding: MaterialStateProperty.all(EdgeInsets.only(
+          padding: WidgetStateProperty.all(EdgeInsets.only(
               top: height / 70,
               bottom: height / 70,
               left: width / 10,
               right: width / 10)),
-          backgroundColor: MaterialStateProperty.all(color),
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          backgroundColor: WidgetStateProperty.all(color),
+          shape: WidgetStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(13),
                   side: BorderSide(color: color)))),

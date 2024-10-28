@@ -48,23 +48,30 @@ class _ShowProductState extends State<ShowProduct> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
+                                Column(
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        "Product Name: ${snapshot.data!.docs[index]['name']}",
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                      child: Wrap(
+                                        children: [
+                                          Text(
+                                            "Product Name:  ${snapshot.data!.docs[index]['company']}",
+                                            style: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 3,
+                                            softWrap: true,
+                                          ),
+                                        ],
                                       ),
                                     ),
                                     IconButton(
                                         onPressed: () {
                                           change(snapshot.data!.docs[index].id,
-                                              'name');
+                                              'company');
                                         },
                                         icon: Icon(Icons.edit))
                                   ],
@@ -111,17 +118,24 @@ class _ShowProductState extends State<ShowProduct> {
                                         icon: Icon(Icons.edit))
                                   ],
                                 ),
-                                Row(
+                                Column(
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        "Company:  ${snapshot.data!.docs[index]['company']}",
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                      child: Wrap(
+                                        children: [
+                                          Text(
+                                            "Company:  ${snapshot.data!.docs[index]['company']}",
+                                            style: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 3,
+                                            softWrap: true,
+                                          ),
+                                        ],
                                       ),
                                     ),
                                     IconButton(
@@ -132,17 +146,24 @@ class _ShowProductState extends State<ShowProduct> {
                                         icon: Icon(Icons.edit))
                                   ],
                                 ),
-                                Row(
+                                Column(
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        "Description:  ${snapshot.data!.docs[index]['description']}",
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                      child: Wrap(
+                                        children: [
+                                          Text(
+                                            "Description:  ${snapshot.data!.docs[index]['description']}",
+                                            style: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 3,
+                                            softWrap: true,
+                                          ),
+                                        ],
                                       ),
                                     ),
                                     IconButton(

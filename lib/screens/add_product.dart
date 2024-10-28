@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_shop/controllers/auth_controller.dart';
+import 'package:my_shop/controllers/home_controller.dart';
 import 'package:my_shop/widgets/custom_textfield.dart';
 
 class AddProduct extends StatelessWidget {
@@ -8,10 +8,11 @@ class AddProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<AuthController>(
-        init: AuthController(),
+    return GetBuilder<MainController>(
+        init: MainController(),
         builder: (auth) {
           return Scaffold(
+            backgroundColor: Colors.indigo,
             appBar: AppBar(
               title: const Text('Add Product'),
             ),
@@ -22,14 +23,14 @@ class AddProduct extends StatelessWidget {
   }
 }
 
-Widget form(BuildContext context, AuthController auth) {
+Widget form(BuildContext context, MainController auth) {
   var height = MediaQuery.of(context).size.height;
   var width = MediaQuery.of(context).size.width;
   return Form(
     key: auth.formKey,
     child: Container(
         decoration: const BoxDecoration(
-          color: Colors.white,
+          color: Colors.indigo,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(46),
             topRight: Radius.circular(46),
@@ -101,15 +102,15 @@ Widget form(BuildContext context, AuthController auth) {
                         }
                       },
                       style: ButtonStyle(
-                        padding: MaterialStateProperty.all(EdgeInsets.only(
+                        padding: WidgetStateProperty.all(EdgeInsets.only(
                             top: height / 55,
                             bottom: height / 55,
                             left: width / 10,
                             right: width / 10)),
-                        backgroundColor: MaterialStateProperty.all(
+                        backgroundColor: WidgetStateProperty.all(
                             const Color.fromRGBO(19, 26, 44, 1.0)),
                         shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                            WidgetStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(13),
                                     side: const BorderSide(

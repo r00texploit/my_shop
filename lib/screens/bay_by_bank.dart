@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_shop/controllers/home_controller.dart';
-import 'package:my_shop/screens/Bill.dart';
 import 'package:my_shop/widgets/background-image.dart';
 import 'package:my_shop/widgets/custom_button.dart';
 import 'package:my_shop/widgets/custom_textfield.dart';

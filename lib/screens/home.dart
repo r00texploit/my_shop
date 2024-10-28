@@ -2,17 +2,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_shop/controllers/auth_controller.dart';
-import 'package:my_shop/model/medicine_model.dart';
 import 'package:my_shop/screens/cart.dart';
 import 'package:my_shop/screens/details.dart';
-import 'package:my_shop/screens/gender_page.dart';
 import 'package:my_shop/widgets/bottom_nav_bar.dart';
 import '../controllers/home_controller.dart';
-import '../widgets/collection_box.dart';
 import '../widgets/new_item.dart';
 import '../widgets/popular_item.dart';
 import 'color.dart';
-import 'data.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

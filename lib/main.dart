@@ -2,15 +2,18 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_shop/controllers/home_controller.dart';
-import 'package:my_shop/screens/data.dart';
 
 import 'controllers/auth_controller.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   Get.put(AuthController());
   Get.put(MainController());
+  // final storagePermission = await Permission.storage.request().isGranted;
+  // if (!storagePermission) {
+  //   await Permission.storage.request();
+  // }
   // uploadData();
   runApp(MyApp());
 }

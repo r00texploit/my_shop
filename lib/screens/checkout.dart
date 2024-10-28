@@ -1,6 +1,5 @@
 import 'package:cupertino_stepper/cupertino_stepper.dart';
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -9,11 +8,9 @@ import 'package:my_shop/controllers/home_controller.dart';
 import 'package:my_shop/screens/Bill.dart';
 import 'package:my_shop/screens/add_location.dart';
 import 'package:my_shop/screens/bay_by_bank.dart';
-import 'package:my_shop/screens/cart.dart';
 import 'package:my_shop/widgets/background-image.dart';
 import 'package:my_shop/widgets/custom_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:my_shop/widgets/custom_textfield.dart';
 import 'package:my_shop/widgets/snackbar.dart';
 
 class CheckOut extends StatelessWidget {

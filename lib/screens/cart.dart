@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_shop/controllers/home_controller.dart';
-import 'package:my_shop/screens/home.dart';
-import 'package:my_shop/widgets/bottom_nav_bar.dart';
 import 'package:my_shop/widgets/custom_button.dart';
 
 import '../widgets/CustomTextStyle.dart';

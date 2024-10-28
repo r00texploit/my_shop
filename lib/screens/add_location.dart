@@ -79,15 +79,15 @@ class _AddLocationState extends State<AddLocation> {
                     right: 130,
                     child: TextButton(
                         style: ButtonStyle(
-                            padding: MaterialStateProperty.all(EdgeInsets.only(
+                            padding: WidgetStateProperty.all(EdgeInsets.only(
                                 top: height / 45,
                                 bottom: height / 45,
                                 left: width / 10,
                                 right: width / 10)),
-                            backgroundColor: MaterialStateProperty.all(
+                            backgroundColor: WidgetStateProperty.all(
                               Colors.yellow[800],
                             ),
-                            shape: MaterialStateProperty
+                            shape: WidgetStateProperty
                                 .all<RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(13),
