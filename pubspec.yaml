@@ -1,0 +1,48 @@
+name: my_shop
+description: A new Flutter project.
+publish_to: none
+version: 1.0.0+1
+environment: { sdk: '>=3.4.4 <4.0.0' }
+dependencies:
+  cached_network_image: null
+  carousel_slider: null
+  cloud_firestore: null
+  cupertino_icons: ^1.0.2
+  cupertino_stepper: null
+  dropdown_search: ^5.0.0
+  email_validator: null
+  firebase_auth: null
+  firebase_core: null
+  firebase_storage: null
+  flutter:
+    sdk: flutter
+  flutter_native_splash: null
+  flutter_spinkit: null
+  flutter_svg: null
+  font_awesome_flutter: null
+  get: null
+  google_maps_flutter: null
+  icon_badge: null
+  image_picker: ^1.1.2
+  intl: null
+  location: ^5.0.0
+  rename: null
+  search_page: null
+  timeline_tile: null
+dev_dependencies:
+  flutter_test: { sdk: flutter }
+flutter_icons:
+  {
+    image_path_android: assets/images/logo.png,
+    image_path_ios: assets/images/logo.png,
+    android: true,
+    ios: true,
+    flutter_lints: ^1.0.0
+  }
+flutter:
+  uses-material-design: true
+  assets: [ assets/fonts/, assets/icons/, assets/images/ ]
+  fonts:
+    - fonts:
+        - { asset: assets/fonts/SourceSansPro.ttf }
+      family: SourceSansPro
